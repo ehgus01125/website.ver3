@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이디 찾기 및 비밀번호 재설정</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .header {
+            margin-bottom: 20px;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        h1, h2 {
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f9f9f9;
+            font-weight: bold;
+            width: 30%;
+        }
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .button-group button {
+            padding: 5px 10px;
+            font-size: 14px;
+            background-color: gray;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .button-group button:hover {
+            background-color: darkgray;
+        }
+        .message {
+            margin-top: 20px;
+            text-align: center;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>계정 복구</h1>
+        </div>
+        
+        <h2>아이디 찾기</h2>
+        <form method="POST">
+            <input type="hidden" name="action" value="find_id">
+            <table>
+                <tr>
+                    <th><label for="name">이름</label></th>
+                    <td><input type="text" id="name" name="name" required></td>
+                </tr>
+                <tr>
+                    <th><label for="gender">성별</label></th>
+                    <td>
+                        <select id="gender" name="gender" required>
+                            <option value="">성별 선택</option>
+                            <option value="male">남자</option>
+                            <option value="female">여자</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="school">학교</label></th>
+                    <td><input type="text" id="school" name="school" required></td>
+                </tr>
+            </table>
+            <div class="button-group">
+                <button type="submit">아이디 찾기</button>
+            </div>
+        </form>
+
+        <h2>비밀번호 재설정</h2>
+        <form method="POST">
+            <input type="hidden" name="action" value="reset_password">
+            <table>
+                <tr>
+                    <th><label for="username">아이디</label></th>
+                    <td><input type="text" id="username" name="username" required></td>
+                </tr>
+                <tr>
+                    <th><label for="birth">생년월일</label></th>
+                    <td><input type="date" id="birth" name="birth" required></td>
+                </tr>
+                <tr>
+                    <th><label for="school_pw">학교</label></th>
+                    <td><input type="text" id="school_pw" name="school" required></td>
+                </tr>
+            </table>
+            <div class="button-group">
+                <button type="submit">비밀번호 재설정</button>
+            </div>
+        </form>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="message">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        <div class="button-group">
+            <button onclick="window.location.href='{{ url_for('login') }}'">로그인 페이지로 돌아가기</button>
+        </div>
+    </div>
+</body>
+</html>

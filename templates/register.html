@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 90%; 
+            width: 30%; 
+            margin: 0 auto;
+        }
+        .info {
+            display: flex;
+            text-align: left; 
+            margin: 10px 0;
+            align-items: center;
+        }
+        label {
+            margin-top: 7px;
+            width: 70px;
+            margin-right: 10px;
+        }
+        input {
+            border: 1px solid black;
+            line-height: 26px;
+            padding: 5px;
+            flex-grow: 1; 
+        }
+        button, .button-link {
+            display: block; 
+            margin: 10px auto;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: black;
+            border: 1px solid black;
+            background: none;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%; 
+        }
+        .gender_info {
+            display: flex;
+        }
+        .radio {
+            margin-top: 3px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>회원가입</h2>
+        <form method="post" action="{{ url_for('register') }}">
+            <div class="info">
+                <label for="username"> ID </label>
+                <input type="text" name="username" placeholder="사용자명" required>
+            </div>
+            <div class="info">
+                <label for="password"> 패스워드 </label>
+                <input type="password" name="password" placeholder="비밀번호" required>
+            </div>
+            <div class="info">
+                <label for="re_password"> 패스워드 확인 </label>
+                <input type="password" name="re_password" placeholder="위와 동일한 비밀번호" required>
+            </div>
+            <div class="info">
+                <label for="name"> 이름 </label>
+                <input type="text" name="name" placeholder="이름" required>
+            </div>
+            <div class="info">
+                <label for="date"> 생년월일 </label>
+                <input type="date" name="birth" required>
+            </div>
+            <div class="info">
+                <label> 성별 </label>
+                <div class="gender_info">
+                    <input type="radio" name="gender" value="man" id="man" class="radio">
+                    <label for="man"> 남성 </label>
+                    <input type="radio" name="gender" value="woman" id="woman" class="radio">
+                    <label for="woman"> 여성 </label>
+                </div>
+            </div>
+            <div class="info">
+                <label for="school"> 학교 </label>
+                <input type="text" name="school" placeholder="학교" required>
+            </div>
+            {% if message %}
+            <p>{{ message }}</p>
+            {% endif %}
+            <button type="submit">가입하기</button>
+        </form>
+        <p>이미 계정이 있으신가요? <a href="{{ url_for('login') }}">로그인</a></p>
+    </div>
+</body>
+</html>

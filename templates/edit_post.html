@@ -1,0 +1,108 @@
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시물 수정</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding-top: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        textarea {
+            height: 200px;
+            resize: vertical;
+        }
+        .box-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #ffffff;
+            width: 99%;
+        }
+        .submit-button {
+            margin-top: 20px;
+            text-align: right;
+        }
+        .submit-button button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: gray;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #pw{
+            display:none;
+            margin-left:10px;
+        }
+    </style>
+    <script>
+        function displayon(event){
+            const checkbox = document.getElementById('pw');
+            if(checkbox.style.display == 'block'){
+                checkbox.style.display = 'none';
+            }
+            else{
+                checkbox.style.display = 'block';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>게시물 수정</h1>
+        <form action="{{url_for('edit_post', Post_id=post.Post_id)}}" method="POST" enctype="multipart/form-data">
+            <label for="title">제목</label>
+            <input type="text" id="title" name="title" placeholder="제목을 입력하세요" value="{{post.title}}"required>
+
+            <label for="content">내용</label>
+            <textarea id="content" name="content" placeholder="내용을 입력하세요" required>{{post.content}}</textarea>
+
+            <div class="box-container">
+                <div>
+                    <input type="checkbox" id="checkbox" name="checkbox" style="margin-left: 50px;" onclick="displayon()">
+                    <label for="passwd_box">게시물 잠금</label>
+                </div>
+                <input type="password" id="pw" name="pw" placeholder="비밀번호 입력" style="margin-left: -640px;">
+
+                <div class="file-upload">
+                    <label for="file" style="margin-right: 10px;">업로드된 파일 교체</label>
+                    <input type="file" id="file" name="file" style="margin-right:50px; font-size: 13px;">
+                </div>
+            </div>
+            <div class="submit-button">
+                <button type="submit">작성하기</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

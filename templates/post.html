@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>게시판</title>
+<style>
+    body{
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        width: 80%;
+        margin: 0 auto;
+    }
+    .header {
+        margin-bottom: 20px;
+    }
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .user-info {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .search-form {
+        display: flex;
+        gap: 10px;
+    }
+    .search-form select,
+    .search-form input[type="text"],
+    .search-form button {
+        padding: 5px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+    }
+    .search-form button {
+        background-color: gray;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+    th {
+        background-color: #f9f9f9;
+    }
+    .button-group {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    .button-group button {
+        padding: 5px 10px;
+        font-size: 14px;
+        background-color: gray;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline; 
+    }
+    .profile {
+        margin-left: 10px;
+    }
+    .profile button {
+        padding: 5px 10px;
+        font-size: 14px;
+        background-color: gray;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    .profile {
+            margin-left: 10px;
+            display: flex;
+            gap: 10px;
+        }
+    .profile button {
+        padding: 5px 10px;
+        font-size: 14px;
+        background-color: gray;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    .locked-post {
+            color: #888;
+            margin-left: 5px;
+        }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>게시판</h1>
+        <div class="header">
+            <div class="user-info">
+                유저: {{ current_user.name }}
+            </div>
+        </div>
+    
+        <div class="header-content">
+            <form class="search-form" action="{{ url_for('search') }}" method="GET">
+                <select name="search_type">
+                    <option value="all" {% if search_type == 'all' %}selected{% endif %}>전체</option>
+                    <option value="title" {% if search_type == 'title' %}selected{% endif %}>제목</option>
+                    <option value="content" {% if search_type == 'content' %}selected{% endif %}>내용</option>
+                    <option value="writeman" {% if search_type == 'writeman' %}selected{% endif %}>작성자</option>
+                </select>
+                <input type="text" name="search_db" placeholder="검색어 입력" value="{{ search_db }}">
+                <button type="submit">검색</button>
+            </form>
+            
+            <div class="profile">
+                <button onclick="window.location.href='{{url_for('profile')}}'">프로필 보기</button>
+                <button onclick="window.location.href='{{url_for('user_list')}}'">사용자 목록</button>
+            </div>
+        </div>
+    
+        <table>
+            <thead>
+                <tr>
+                    <th class="narrow-column">번호</th>
+                    <th class="title-column">제목</th>
+                    <th class="author-column">작성자</th>
+                    <th class="date-column">작성일</th>
+                    <th class="narrow-column">조회수</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>
+                        <a href="{{ url_for('read_post', Post_id=post['Post_id']) }}">
+                            {{ post['title'] }}
+                            {% if post['is_locked'] and not king %}
+                                <span class="locked-post">🔒</span>
+                            {% endif %}
+                        </a>
+                    </td>
+                    
+                    <td>{{ post['username'] }}</td>
+                    <td>{{ post['time'] }}</td>
+                    <td>{{ post['view'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div class="button-group">
+            <button onclick="window.location.href='{{ url_for('create_post') }}'">게시물 작성</button>
+            <button onclick="window.location.href='{{ url_for('logout') }}'">로그아웃</button>
+        </div>
+    </div>
+</body>
+</html>

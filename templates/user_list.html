@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용자 목록</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+        .button-group {
+            margin-top: 20px;
+        }
+        .button-group a {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: gray;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .button-group a:hover {
+            background-color: darkgray;
+        }
+        .disabled-link {
+            color: gray;
+            text-decoration: none;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>사용자 목록</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>사용자 이름</th>
+                    <th>이름</th>
+                    <th>프로필 보기</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>
+                        {% if user.admin %}
+                            <span class="disabled-link">관리자 프로필</span>
+                        {% else %}
+                            <a href="{{ url_for('user_profile', user_id=user.id) }}">프로필 보기</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="button-group">
+            <a href="{{ url_for('post') }}">게시판으로 돌아가기</a>
+        </div>
+    </div>
+</body>
+</html>
