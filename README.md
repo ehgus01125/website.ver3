@@ -31,3 +31,11 @@
 ## set_new_password
 
 <img width="1142" alt="image" src="https://github.com/user-attachments/assets/700ecbbc-f032-4198-98e0-b1a482a82e11">
+
+## 업로드 기능
+
+<img width="810" alt="image" src="https://github.com/user-attachments/assets/d20dac04-fe4f-44d8-a068-ac9bb77a3708">
+
+## 다운로드 기능
+
+<img width="876" alt="image" src="https://github.com/user-attachments/assets/38974726-a576-4e60-826a-53d8eaaea90e">
