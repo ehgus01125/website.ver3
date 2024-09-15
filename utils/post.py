@@ -56,7 +56,7 @@ def post_page(app):
             admin = king(current_user)
             
             if post['post_password'] and not admin:
-                return redirect(url_for('check_post_password', Post_id=Post_id))
+                return redirect(url_for('check_password', Post_id=Post_id))
             
             cursor.execute("UPDATE Post SET view = view + 1 WHERE Post_id = %s", (Post_id,))
             db.commit()
