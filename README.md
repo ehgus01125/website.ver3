@@ -20,6 +20,10 @@
 
 <img width="1117" alt="image" src="https://github.com/user-attachments/assets/452d1994-11bc-4644-8e8e-b305b1d4b811">
 
+## 프로필 사진 업로드
+
+<img width="1423" alt="image" src="https://github.com/user-attachments/assets/1b2cb3cf-f57a-48b1-a3d5-52062c8010cc">
+
 ## user_list.html
 
 <img width="848" alt="image" src="https://github.com/user-attachments/assets/9c036689-314a-4b30-8d7b-0864f1a5dffb">
